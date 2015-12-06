@@ -1,4 +1,4 @@
-include ':library'
+include ':physicaloid'
 include ':physicaloidTest'
 include ':physicaloidTutorial1'
 include ':physicaloidTutorial2'
