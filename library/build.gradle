@@ -1,4 +1,11 @@
+import java.text.SimpleDateFormat
+
+group = 'net.cattaka'
+version = '0.0.1'
+
 apply plugin: 'com.android.library'
+apply plugin: 'com.github.dcendents.android-maven'
+apply plugin: 'com.jfrog.bintray'
 
 android {
     compileSdkVersion 14
@@ -13,6 +20,63 @@ android {
         release {
             minifyEnabled false
             proguardFiles getDefaultProguardFile('proguard-android.txt'), 'proguard-rules.txt'
+        }
+    }
+}
+
+def projectId = "physicaloid"
+def projectName = 'Physicaloid Library'
+def siteUrl = 'https://github.com/cattaka/PhysicaloidVc'
+def gitUrl = 'https://github.com/cattaka/PhysicaloidVc.git'
+def issueUrl = 'https://github.com/cattaka/PhysicaloidVc/issues'
+def projectDesc = 'Physicaloid Library Version Cattaka'
+
+bintray {
+    user = bintray_user
+    key = bintray_apikey
+
+    configurations = ['archives'] //When uploading configuration files
+
+    pkg {
+        repo = 'maven'
+        name = projectId
+        licenses = ['Apache-2.0']
+        desc = projectDesc
+        websiteUrl = siteUrl
+        issueTrackerUrl = issueUrl
+        vcsUrl = gitUrl
+        licenses = ['Apache-2.0']
+        labels = ['aar', 'android']
+        publicDownloadNumbers = true
+    }
+}
+
+install {
+    repositories.mavenInstaller {
+        pom {
+            project {
+                packaging 'aar'
+                name projectName
+                url siteUrl
+                licenses {
+                    license {
+                        name 'The Apache Software License, Version 2.0'
+                        url 'http://www.apache.org/licenses/LICENSE-2.0.txt'
+                    }
+                }
+                developers {
+                    developer {
+                        id 'cattaka'
+                        name 'Takao Sumitomo'
+                        email 'cattaka@mail.cattaka.net'
+                    }
+                }
+                scm {
+                    connection gitUrl
+                    developerConnection gitUrl
+                    url siteUrl
+                }
+            }
         }
     }
 }
