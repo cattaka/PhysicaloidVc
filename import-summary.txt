@@ -1,0 +1,201 @@
+ECLIPSE ANDROID PROJECT IMPORT SUMMARY
+======================================
+
+Ignored Files:
+--------------
+The following files were *not* copied into the new Gradle project; you
+should evaluate whether these are still needed in your project and if
+so manually move them:
+
+* doc/
+* doc/allclasses-frame.html
+* doc/allclasses-noframe.html
+* doc/com/
+* doc/com/physicaloid/
+* doc/com/physicaloid/BuildConfig.html
+* doc/com/physicaloid/R.attr.html
+* doc/com/physicaloid/R.drawable.html
+* doc/com/physicaloid/R.html
+* doc/com/physicaloid/R.string.html
+* doc/com/physicaloid/R.style.html
+* doc/com/physicaloid/class-use/
+* doc/com/physicaloid/class-use/BuildConfig.html
+* doc/com/physicaloid/class-use/R.attr.html
+* doc/com/physicaloid/class-use/R.drawable.html
+* doc/com/physicaloid/class-use/R.html
+* doc/com/physicaloid/class-use/R.string.html
+* doc/com/physicaloid/class-use/R.style.html
+* doc/com/physicaloid/lib/
+* doc/com/physicaloid/lib/Boards.ChipTypes.html
+* doc/com/physicaloid/lib/Boards.ComProtocols.html
+* doc/com/physicaloid/lib/Boards.UploadProtocols.html
+* doc/com/physicaloid/lib/Boards.html
+* doc/com/physicaloid/lib/Physicaloid.UploadCallBack.html
+* doc/com/physicaloid/lib/Physicaloid.html
+* doc/com/physicaloid/lib/UsbVidList.html
+* doc/com/physicaloid/lib/class-use/
+* doc/com/physicaloid/lib/class-use/Boards.ChipTypes.html
+* doc/com/physicaloid/lib/class-use/Boards.ComProtocols.html
+* doc/com/physicaloid/lib/class-use/Boards.UploadProtocols.html
+* doc/com/physicaloid/lib/class-use/Boards.html
+* doc/com/physicaloid/lib/class-use/Physicaloid.UploadCallBack.html
+* doc/com/physicaloid/lib/class-use/Physicaloid.html
+* doc/com/physicaloid/lib/class-use/UsbVidList.html
+* doc/com/physicaloid/lib/framework/
+* doc/com/physicaloid/lib/framework/AutoCommunicator.html
+* doc/com/physicaloid/lib/framework/SerialCommunicator.html
+* doc/com/physicaloid/lib/framework/Uploader.html
+* doc/com/physicaloid/lib/framework/class-use/
+* doc/com/physicaloid/lib/framework/class-use/AutoCommunicator.html
+* doc/com/physicaloid/lib/framework/class-use/SerialCommunicator.html
+* doc/com/physicaloid/lib/framework/class-use/Uploader.html
+* doc/com/physicaloid/lib/framework/package-frame.html
+* doc/com/physicaloid/lib/framework/package-summary.html
+* doc/com/physicaloid/lib/framework/package-tree.html
+* doc/com/physicaloid/lib/framework/package-use.html
+* doc/com/physicaloid/lib/package-frame.html
+* doc/com/physicaloid/lib/package-summary.html
+* doc/com/physicaloid/lib/package-tree.html
+* doc/com/physicaloid/lib/package-use.html
+* doc/com/physicaloid/lib/programmer/
+* doc/com/physicaloid/lib/programmer/avr/
+* doc/com/physicaloid/lib/programmer/avr/AvrConf.html
+* doc/com/physicaloid/lib/programmer/avr/AvrUploader.html
+* doc/com/physicaloid/lib/programmer/avr/IntelHexFileToBuf.html
+* doc/com/physicaloid/lib/programmer/avr/Stk500.html
+* doc/com/physicaloid/lib/programmer/avr/Stk500V2.html
+* doc/com/physicaloid/lib/programmer/avr/UploadErrors.html
+* doc/com/physicaloid/lib/programmer/avr/UploadProtocol.html
+* doc/com/physicaloid/lib/programmer/avr/class-use/
+* doc/com/physicaloid/lib/programmer/avr/class-use/AvrConf.html
+* doc/com/physicaloid/lib/programmer/avr/class-use/AvrUploader.html
+* doc/com/physicaloid/lib/programmer/avr/class-use/IntelHexFileToBuf.html
+* doc/com/physicaloid/lib/programmer/avr/class-use/Stk500.html
+* doc/com/physicaloid/lib/programmer/avr/class-use/Stk500V2.html
+* doc/com/physicaloid/lib/programmer/avr/class-use/UploadErrors.html
+* doc/com/physicaloid/lib/programmer/avr/class-use/UploadProtocol.html
+* doc/com/physicaloid/lib/programmer/avr/package-frame.html
+* doc/com/physicaloid/lib/programmer/avr/package-summary.html
+* doc/com/physicaloid/lib/programmer/avr/package-tree.html
+* doc/com/physicaloid/lib/programmer/avr/package-use.html
+* doc/com/physicaloid/lib/usb/
+* doc/com/physicaloid/lib/usb/UsbAccessor.html
+* doc/com/physicaloid/lib/usb/UsbCdcConnection.html
+* doc/com/physicaloid/lib/usb/UsbIds.DriverType.html
+* doc/com/physicaloid/lib/usb/UsbIds.Vid.html
+* doc/com/physicaloid/lib/usb/UsbIds.html
+* doc/com/physicaloid/lib/usb/UsbVidPid.html
+* doc/com/physicaloid/lib/usb/class-use/
+* doc/com/physicaloid/lib/usb/class-use/UsbAccessor.html
+* doc/com/physicaloid/lib/usb/class-use/UsbCdcConnection.html
+* doc/com/physicaloid/lib/usb/class-use/UsbIds.DriverType.html
+* doc/com/physicaloid/lib/usb/class-use/UsbIds.Vid.html
+* doc/com/physicaloid/lib/usb/class-use/UsbIds.html
+* doc/com/physicaloid/lib/usb/class-use/UsbVidPid.html
+* doc/com/physicaloid/lib/usb/driver/
+* doc/com/physicaloid/lib/usb/driver/uart/
+* doc/com/physicaloid/lib/usb/driver/uart/ReadLisener.html
+* doc/com/physicaloid/lib/usb/driver/uart/UartCdcAcm.html
+* doc/com/physicaloid/lib/usb/driver/uart/UartConfig.html
+* doc/com/physicaloid/lib/usb/driver/uart/UartFtdi.html
+* doc/com/physicaloid/lib/usb/driver/uart/class-use/
+* doc/com/physicaloid/lib/usb/driver/uart/class-use/ReadLisener.html
+* doc/com/physicaloid/lib/usb/driver/uart/class-use/UartCdcAcm.html
+* doc/com/physicaloid/lib/usb/driver/uart/class-use/UartConfig.html
+* doc/com/physicaloid/lib/usb/driver/uart/class-use/UartFtdi.html
+* doc/com/physicaloid/lib/usb/driver/uart/package-frame.html
+* doc/com/physicaloid/lib/usb/driver/uart/package-summary.html
+* doc/com/physicaloid/lib/usb/driver/uart/package-tree.html
+* doc/com/physicaloid/lib/usb/driver/uart/package-use.html
+* doc/com/physicaloid/lib/usb/package-frame.html
+* doc/com/physicaloid/lib/usb/package-summary.html
+* doc/com/physicaloid/lib/usb/package-tree.html
+* doc/com/physicaloid/lib/usb/package-use.html
+* doc/com/physicaloid/misc/
+* doc/com/physicaloid/misc/RingBuffer.html
+* doc/com/physicaloid/misc/class-use/
+* doc/com/physicaloid/misc/class-use/RingBuffer.html
+* doc/com/physicaloid/misc/package-frame.html
+* doc/com/physicaloid/misc/package-summary.html
+* doc/com/physicaloid/misc/package-tree.html
+* doc/com/physicaloid/misc/package-use.html
+* doc/com/physicaloid/package-frame.html
+* doc/com/physicaloid/package-summary.html
+* doc/com/physicaloid/package-tree.html
+* doc/com/physicaloid/package-use.html
+* doc/constant-values.html
+* doc/cz/
+* doc/cz/jaybee/
+* doc/cz/jaybee/intelhex/
+* doc/cz/jaybee/intelhex/IntelHexDataListener.html
+* doc/cz/jaybee/intelhex/IntelHexParser.html
+* doc/cz/jaybee/intelhex/IntelHexParserRun.html
+* doc/cz/jaybee/intelhex/IntelHexRecordType.html
+* doc/cz/jaybee/intelhex/class-use/
+* doc/cz/jaybee/intelhex/class-use/IntelHexDataListener.html
+* doc/cz/jaybee/intelhex/class-use/IntelHexParser.html
+* doc/cz/jaybee/intelhex/class-use/IntelHexParserRun.html
+* doc/cz/jaybee/intelhex/class-use/IntelHexRecordType.html
+* doc/cz/jaybee/intelhex/package-frame.html
+* doc/cz/jaybee/intelhex/package-summary.html
+* doc/cz/jaybee/intelhex/package-tree.html
+* doc/cz/jaybee/intelhex/package-use.html
+* doc/deprecated-list.html
+* doc/help-doc.html
+* doc/index-files/
+* doc/index-files/index-1.html
+* doc/index-files/index-10.html
+* doc/index-files/index-11.html
+* doc/index-files/index-12.html
+* doc/index-files/index-13.html
+* doc/index-files/index-14.html
+* doc/index-files/index-15.html
+* doc/index-files/index-16.html
+* doc/index-files/index-17.html
+* doc/index-files/index-18.html
+* doc/index-files/index-19.html
+* doc/index-files/index-2.html
+* doc/index-files/index-20.html
+* doc/index-files/index-3.html
+* doc/index-files/index-4.html
+* doc/index-files/index-5.html
+* doc/index-files/index-6.html
+* doc/index-files/index-7.html
+* doc/index-files/index-8.html
+* doc/index-files/index-9.html
+* doc/index.html
+* doc/overview-frame.html
+* doc/overview-summary.html
+* doc/overview-tree.html
+* doc/package-list
+* doc/resources/
+* doc/resources/background.gif
+* doc/resources/tab.gif
+* doc/resources/titlebar.gif
+* doc/resources/titlebar_end.gif
+* doc/stylesheet.css
+* proguard-project.txt
+
+Moved Files:
+------------
+Android Gradle projects use a different directory structure than ADT
+Eclipse projects. Here's how the projects were restructured:
+
+* AndroidManifest.xml => app/src/main/AndroidManifest.xml
+* libs/d2xx.jar => app/libs/d2xx.jar
+* src/ => app/src/main/java/
+
+Next Steps:
+-----------
+You can now build the project. The Gradle project needs network
+connectivity to download dependencies.
+
+Bugs:
+-----
+If for some reason your project does not build, and you determine that
+it is due to a bug or limitation of the Eclipse to Gradle importer,
+please file a bug at http://b.android.com with category
+Component-Tools.
+
+(This import summary is for your information only, and can be deleted
+after import once you are satisfied with the results.)

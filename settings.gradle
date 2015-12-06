@@ -1,0 +1,7 @@
+include ':library'
+include ':physicaloidTest'
+include ':physicaloidTutorial1'
+include ':physicaloidTutorial2'
+include ':physicaloidTutorial3'
+include ':physicaloidTutorial4'
+include ':physicaloidTutorial5'
