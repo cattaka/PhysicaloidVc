@@ -1,5 +1,5 @@
 group = 'net.cattaka'
-version = '1.0.1'
+version = '1.0.2-SNAPSHOT'
 
 apply plugin: 'com.android.library'
 apply plugin: 'com.github.dcendents.android-maven'
