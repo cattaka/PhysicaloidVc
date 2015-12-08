@@ -17,6 +17,7 @@
 package com.physicaloid.lib;
 
 import android.content.Context;
+import android.hardware.usb.UsbDevice;
 import android.util.Log;
 
 import com.physicaloid.BuildConfig;
@@ -51,6 +52,30 @@ public class Physicaloid {
 
     public Physicaloid(Context context) {
         this.mContext = context;
+    }
+
+    /**
+     * Opens a device and communicate USB UART by default settings
+     * @param baudrate
+     * @param device
+     * @return true : successful , false : fail
+     * @throws RuntimeException
+     */
+    public boolean open(int baudrate, UsbDevice device) throws RuntimeException {
+        UartConfig uart = new UartConfig();
+        uart.baudrate = baudrate;
+        synchronized (LOCK) {
+            if(mSerial == null) {
+                mSerial = new AutoCommunicator().getSerialCommunicator(mContext, device);
+                if(mSerial == null) return false;
+            }
+            if(mSerial.open()) {
+                mSerial.setUartConfig(uart);
+                return true;
+            } else {
+                return false;
+            }
+        }
     }
 
     /**
