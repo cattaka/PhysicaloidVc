@@ -32,6 +32,25 @@ public class AutoCommunicator {
     public AutoCommunicator() {
     }
 
+    public SerialCommunicator getSerialCommunicator(Context context, UsbDevice device) {
+        UsbAccessor usbAccess = UsbAccessor.INSTANCE;
+        usbAccess.init(context);
+
+        int vid = device.getVendorId();
+        for(UsbVidList usbVid : UsbVidList.values()) {
+            if(vid == usbVid.getVid()) {
+                if(vid == UsbVidList.FTDI.getVid()) {
+                    return new UartFtdi(context);
+                } else if(vid == UsbVidList.CP210X.getVid()) {
+                    return new UartCp210x(context);
+                }
+            }
+        }
+
+        return new UartCdcAcm(context);
+    }
+
+
     public SerialCommunicator getSerialCommunicator(Context context) {
         UsbAccessor usbAccess = UsbAccessor.INSTANCE;
         usbAccess.init(context);
