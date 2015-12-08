@@ -1,7 +1,5 @@
-import java.text.SimpleDateFormat
-
 group = 'net.cattaka'
-version = '0.0.1'
+version = '1.0.0'
 
 apply plugin: 'com.android.library'
 apply plugin: 'com.github.dcendents.android-maven'
