@@ -1,12 +1,12 @@
 <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    xmlns:tools="http://schemas.android.com/tools"
-    android:layout_width="match_parent"
-    android:layout_height="match_parent"
-    android:paddingBottom="@dimen/activity_vertical_margin"
-    android:paddingLeft="@dimen/activity_horizontal_margin"
-    android:paddingRight="@dimen/activity_horizontal_margin"
-    android:paddingTop="@dimen/activity_vertical_margin"
-    tools:context=".PhysicaloidTestActivity" >
+                xmlns:tools="http://schemas.android.com/tools"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:paddingBottom="@dimen/activity_vertical_margin"
+                android:paddingLeft="@dimen/activity_horizontal_margin"
+                android:paddingRight="@dimen/activity_horizontal_margin"
+                android:paddingTop="@dimen/activity_vertical_margin"
+                tools:context=".PhysicaloidTestActivity">
 
     <Button
         android:id="@+id/btOpen"
@@ -15,7 +15,7 @@
         android:layout_alignParentLeft="true"
         android:layout_alignParentTop="true"
         android:onClick="onClickOpen"
-        android:text="Open" />
+        android:text="Open"/>
 
     <Button
         android:id="@+id/btClose"
@@ -24,7 +24,7 @@
         android:layout_alignParentTop="true"
         android:layout_toRightOf="@+id/btOpen"
         android:onClick="onClickClose"
-        android:text="Close" />
+        android:text="Close"/>
 
     <Button
         android:id="@+id/btRead"
@@ -33,7 +33,7 @@
         android:layout_alignParentLeft="true"
         android:layout_below="@+id/etWrite"
         android:onClick="onClickRead"
-        android:text="Read" />
+        android:text="Read"/>
 
     <ScrollView
         android:id="@+id/scrollView1"
@@ -42,19 +42,19 @@
         android:layout_alignParentBottom="true"
         android:layout_alignParentLeft="true"
         android:layout_alignParentRight="true"
-        android:layout_below="@+id/btRead" >
+        android:layout_below="@+id/btRead">
 
         <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="match_parent"
-            android:orientation="vertical" >
+            android:orientation="vertical">
 
             <TextView
                 android:id="@+id/tvRead"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_alignParentLeft="true"
-                android:layout_below="@+id/btRead" />
+                android:layout_below="@+id/btRead"/>
         </LinearLayout>
     </ScrollView>
 
@@ -66,7 +66,7 @@
         android:layout_alignBottom="@+id/btRead"
         android:layout_toRightOf="@+id/btRead"
         android:onClick="onClickReadCallback"
-        android:text="ReadCallbackOff" />
+        android:text="ReadCallbackOff"/>
 
     <EditText
         android:id="@+id/etWrite"
@@ -75,9 +75,9 @@
         android:layout_alignParentLeft="true"
         android:layout_below="@+id/btUploadAsset"
         android:layout_toLeftOf="@+id/btWrite"
-        android:ems="10" >
+        android:ems="10">
 
-        <requestFocus />
+        <requestFocus/>
     </EditText>
 
     <Button
@@ -87,7 +87,7 @@
         android:layout_alignParentLeft="true"
         android:layout_below="@+id/btOpen"
         android:onClick="onClickUpload"
-        android:text="Up" />
+        android:text="Up"/>
 
     <Button
         android:id="@+id/btUploadAsset"
@@ -97,7 +97,7 @@
         android:layout_alignBottom="@+id/btUpload"
         android:layout_toRightOf="@+id/btUpload"
         android:onClick="onClickUploadAsset"
-        android:text="UpAsset" />
+        android:text="UpAsset"/>
 
     <Button
         android:id="@+id/btCancelUpload"
@@ -107,7 +107,7 @@
         android:layout_alignBottom="@+id/btUpload"
         android:layout_toRightOf="@+id/btUploadAsset"
         android:onClick="onClickCancelUpload"
-        android:text="Cancel" />
+        android:text="Cancel"/>
 
     <Button
         android:id="@+id/btWrite"
@@ -117,7 +117,7 @@
         android:layout_alignBottom="@+id/etWrite"
         android:layout_alignParentRight="true"
         android:onClick="onClickWrite"
-        android:text="Write" />
+        android:text="Write"/>
 
     <TextView
         android:id="@+id/tvSelectedBoard"
@@ -126,6 +126,6 @@
         android:layout_alignBaseline="@+id/btClose"
         android:layout_alignBottom="@+id/btClose"
         android:layout_toRightOf="@+id/btClose"
-        android:text="Arduino UNO" />
+        android:text="Arduino UNO"/>
 
 </RelativeLayout>

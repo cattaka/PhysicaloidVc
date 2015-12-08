@@ -1,8 +1,5 @@
 package com.physicaloid.tutorial5;
 
-import java.io.IOException;
-import java.io.UnsupportedEncodingException;
-
 import android.app.Activity;
 import android.content.BroadcastReceiver;
 import android.content.Context;
@@ -26,6 +23,9 @@ import com.physicaloid.lib.Physicaloid.UploadCallBack;
 import com.physicaloid.lib.programmer.avr.UploadErrors;
 import com.physicaloid.lib.usb.driver.uart.ReadLisener;
 import com.physicaloid.lib.usb.driver.uart.UartConfig;
+
+import java.io.IOException;
+import java.io.UnsupportedEncodingException;
 
 public class Tutorial5Activity extends Activity {
     private static final String TAG = Tutorial5Activity.class.getSimpleName();
@@ -54,12 +54,12 @@ public class Tutorial5Activity extends Activity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_tutorial5);
 
-        btOpen  = (Button) findViewById(R.id.btOpen);
+        btOpen = (Button) findViewById(R.id.btOpen);
         btClose = (Button) findViewById(R.id.btClose);
         btWrite = (Button) findViewById(R.id.btWrite);
-        btUpload= (Button) findViewById(R.id.btUpload);
+        btUpload = (Button) findViewById(R.id.btUpload);
         etWrite = (EditText) findViewById(R.id.etWrite);
-        tvRead  = (TextView) findViewById(R.id.tvRead);
+        tvRead = (TextView) findViewById(R.id.tvRead);
         rgBaudrate = (RadioGroup) findViewById(R.id.rgBaudrate);
         rb0 = (RadioButton) findViewById(R.id.rb0);
         rb1 = (RadioButton) findViewById(R.id.rb1);
@@ -73,18 +73,18 @@ public class Tutorial5Activity extends Activity {
             @Override
             public void onCheckedChanged(RadioGroup group, int checkedId) {
                 switch (checkedId) {
-                case R.id.rb0:
-                    mPhysicaloid.setBaudrate(9600);
-                    break;
+                    case R.id.rb0:
+                        mPhysicaloid.setBaudrate(9600);
+                        break;
 
-                case R.id.rb1:
-                    UartConfig uartConfig = new UartConfig(115200, UartConfig.DATA_BITS8, UartConfig.STOP_BITS1, UartConfig.PARITY_NONE, false, false);
-                    mPhysicaloid.setConfig(uartConfig);
-                    break;
+                    case R.id.rb1:
+                        UartConfig uartConfig = new UartConfig(115200, UartConfig.DATA_BITS8, UartConfig.STOP_BITS1, UartConfig.PARITY_NONE, false, false);
+                        mPhysicaloid.setConfig(uartConfig);
+                        break;
 
-                default:
-                    tvAppend(tvRead, "no set");
-                    break;
+                    default:
+                        tvAppend(tvRead, "no set");
+                        break;
                 }
             }
         });
@@ -146,7 +146,7 @@ public class Tutorial5Activity extends Activity {
     }
 
     private void closeDevice() {
-        if(mPhysicaloid.close()) {
+        if (mPhysicaloid.close()) {
             setEnabledUi(false);
             mPhysicaloid.clearReadListener();
         }
@@ -154,7 +154,7 @@ public class Tutorial5Activity extends Activity {
 
     public void onClickWrite(View v) {
         String str = etWrite.getText().toString();
-        if(str.length()>0) {
+        if (str.length() > 0) {
             byte[] buf = str.getBytes();
             mPhysicaloid.write(buf, buf.length);
         }
@@ -168,12 +168,12 @@ public class Tutorial5Activity extends Activity {
 
         @Override
         public void onUploading(int value) {
-            tvAppend(tvRead, "Upload : "+value+" %\n");
+            tvAppend(tvRead, "Upload : " + value + " %\n");
         }
 
         @Override
         public void onPostUpload(boolean success) {
-            if(success) {
+            if (success) {
                 tvAppend(tvRead, "Upload : Successful\n");
             } else {
                 tvAppend(tvRead, "Upload fail\n");
@@ -187,7 +187,7 @@ public class Tutorial5Activity extends Activity {
 
         @Override
         public void onError(UploadErrors err) {
-            tvAppend(tvRead, "Error  : "+err.toString()+"\n");
+            tvAppend(tvRead, "Error  : " + err.toString() + "\n");
         }
     };
 
@@ -203,6 +203,7 @@ public class Tutorial5Activity extends Activity {
     }
 
     Handler mHandler = new Handler();
+
     private void tvAppend(TextView tv, CharSequence text) {
         final TextView ftv = tv;
         final CharSequence ftext = text;
@@ -215,7 +216,7 @@ public class Tutorial5Activity extends Activity {
     }
 
     private void setEnabledUi(boolean on) {
-        if(on) {
+        if (on) {
             btOpen.setEnabled(false);
             btClose.setEnabled(true);
             btWrite.setEnabled(true);
@@ -244,7 +245,9 @@ public class Tutorial5Activity extends Activity {
         if (UsbManager.ACTION_USB_DEVICE_ATTACHED.equals(action)) {
             openDevice();
         }
-    };
+    }
+
+    ;
     //****************************************************************
 
     //****************************************************************

@@ -2,8 +2,8 @@ package com.physicaloid.lib.fpga;
 
 import android.content.Context;
 
-import com.physicaloid.lib.Physicaloid;
 import com.physicaloid.BuildConfig;
+import com.physicaloid.lib.Physicaloid;
 
 public class PhysicaloidFpga extends Physicaloid {
     @SuppressWarnings("unused")
@@ -29,9 +29,9 @@ public class PhysicaloidFpga extends Physicaloid {
     }
 
     public int write(byte[] buf, int offset, int size) throws RuntimeException {
-        synchronized (LOCK_WRITE){
-            if(mSerial == null) return 0;
-            if(mFilter == null) return 0;
+        synchronized (LOCK_WRITE) {
+            if (mSerial == null) return 0;
+            if (mFilter == null) return 0;
             return mFilter.writeWithEscape(mSerial, buf, offset, size);
         }
     }

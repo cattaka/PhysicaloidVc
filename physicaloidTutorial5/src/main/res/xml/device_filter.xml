@@ -14,8 +14,10 @@
      limitations under the License.
 -->
 <resources>
-    <usb-device vendor-id="1027"/> <!-- FTDI VID:0x0403 -->
-    <usb-device vendor-id="9025"/> <!-- Arduino VID:0x2341 PID:0x0043 -->
-<!-- <usb-device vendor-id="" product-id="" /> --> <!--  -->
-<!-- <usb-device class="2" /> --> <!-- CDC -->
+    <usb-device vendor-id="1027"/>
+    <!-- FTDI VID:0x0403 -->
+    <usb-device vendor-id="9025"/>
+    <!-- Arduino VID:0x2341 PID:0x0043 -->
+    <!-- <usb-device vendor-id="" product-id="" /> --> <!--  -->
+    <!-- <usb-device class="2" /> --> <!-- CDC -->
 </resources>

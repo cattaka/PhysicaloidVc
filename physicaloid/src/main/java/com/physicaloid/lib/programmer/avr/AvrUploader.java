@@ -45,11 +45,11 @@ public class AvrUploader {
 
     private static final boolean DEBUG_SHOW_HEXDUMP = false && BuildConfig.DEBUG;
 
-    private UploadProtocol      mProg;
-    private SerialCommunicator  mComm;
-    private IntelHexFileToBuf   mIntelHex;
-    private AvrConf             mAVRConf;
-    private AVRMem              mAVRMem;
+    private UploadProtocol mProg;
+    private SerialCommunicator mComm;
+    private IntelHexFileToBuf mIntelHex;
+    private AvrConf mAVRConf;
+    private AVRMem mAVRMem;
 
     public AvrUploader(SerialCommunicator serial) {
         mComm = serial;
@@ -60,39 +60,49 @@ public class AvrUploader {
     }
 
     public boolean run(String filePath, Boards board, UploadCallBack callback) {
-        if(filePath == null) {
-            if(callback != null){ callback.onError(UploadErrors.FILE_OPEN); }
+        if (filePath == null) {
+            if (callback != null) {
+                callback.onError(UploadErrors.FILE_OPEN);
+            }
             return false;
         }
 
         File file = new File(filePath);
-        if(!file.exists() || !file.isFile() || !file.canRead()) {
-            if(callback != null){ callback.onError(UploadErrors.FILE_OPEN); }
+        if (!file.exists() || !file.isFile() || !file.canRead()) {
+            if (callback != null) {
+                callback.onError(UploadErrors.FILE_OPEN);
+            }
             return false;
         }
 
         InputStream is;
         try {
             is = new FileInputStream(filePath);
-        } catch(Exception e) {
-            if(callback != null){ callback.onError(UploadErrors.FILE_OPEN); }
+        } catch (Exception e) {
+            if (callback != null) {
+                callback.onError(UploadErrors.FILE_OPEN);
+            }
             return false;
         }
         return run(is, board, callback);
     }
 
     public boolean run(InputStream hexFile, Boards board, UploadCallBack callback) {
-        if(board == null) {
-            if(callback != null){ callback.onError(UploadErrors.AVR_CHIPTYPE); }
+        if (board == null) {
+            if (callback != null) {
+                callback.onError(UploadErrors.AVR_CHIPTYPE);
+            }
             return false;
         }
 
         if (board.uploadProtocol == Boards.UploadProtocols.STK500) {
             mProg = new Stk500();
-        } else if(board.uploadProtocol == Boards.UploadProtocols.STK500V2) {
+        } else if (board.uploadProtocol == Boards.UploadProtocols.STK500V2) {
             mProg = new Stk500V2();
         } else {
-            if(callback != null){ callback.onError(UploadErrors.AVR_CHIPTYPE); }
+            if (callback != null) {
+                callback.onError(UploadErrors.AVR_CHIPTYPE);
+            }
             return false;
         }
 
@@ -104,8 +114,10 @@ public class AvrUploader {
         /////////////////////////////////////////////////////////////////
         try {
             setConfig(board); // .hexを読む前に実行すること(AVRMemがnewされない)
-        } catch(Exception e) {
-            if(callback != null){ callback.onError(UploadErrors.AVR_CHIPTYPE); }
+        } catch (Exception e) {
+            if (callback != null) {
+                callback.onError(UploadErrors.AVR_CHIPTYPE);
+            }
             return false;
         }
 
@@ -114,9 +126,11 @@ public class AvrUploader {
         /////////////////////////////////////////////////////////////////
         try {
             getFileToBuf(hexFile);
-        } catch(Exception e) {
+        } catch (Exception e) {
             mIntelHex = null;
-            if(callback != null){ callback.onError(UploadErrors.HEX_FILE_OPEN); }
+            if (callback != null) {
+                callback.onError(UploadErrors.HEX_FILE_OPEN);
+            }
             return false;
         }
 
@@ -127,25 +141,33 @@ public class AvrUploader {
         mProg.open();
         mProg.enable();
         int initOK = mProg.initialize();
-        if(initOK < 0) {
-            Log.e(TAG,"initialization failed ("+initOK+")");
-            if(callback != null){ callback.onError(UploadErrors.CHIP_INIT); }
+        if (initOK < 0) {
+            Log.e(TAG, "initialization failed (" + initOK + ")");
+            if (callback != null) {
+                callback.onError(UploadErrors.CHIP_INIT);
+            }
             return false;
         }
 //        Log.v(TAG,"AVR device initialized and ready to accept instructions");
 
         int sigOK = mProg.check_sig_bytes();
-        if( sigOK != 0) {
-            Log.e(TAG,"check signature failed ("+sigOK+")");
-            if(callback != null){ callback.onError(UploadErrors.SIGNATURE); }
+        if (sigOK != 0) {
+            Log.e(TAG, "check signature failed (" + sigOK + ")");
+            if (callback != null) {
+                callback.onError(UploadErrors.SIGNATURE);
+            }
             return false;
         }
 
         int writeOK = mProg.paged_write();
-        if(writeOK == 0) { return false; } // canceled
-        if(writeOK < 0) {
-            Log.e(TAG,"paged write failed ("+initOK+")");
-            if(callback != null){ callback.onError(UploadErrors.PAGE_WRITE); }
+        if (writeOK == 0) {
+            return false;
+        } // canceled
+        if (writeOK < 0) {
+            Log.e(TAG, "paged write failed (" + initOK + ")");
+            if (callback != null) {
+                callback.onError(UploadErrors.PAGE_WRITE);
+            }
             return false;
         }
         mProg.disable();
@@ -154,6 +176,7 @@ public class AvrUploader {
 
     /**
      * Sets AVR configs
+     *
      * @param board
      * @throws InterruptedException
      */
@@ -164,6 +187,7 @@ public class AvrUploader {
 
     /**
      * Converts a hex file to byte arrays
+     *
      * @param hexFile
      * @throws FileNotFoundException
      * @throws IOException
@@ -173,22 +197,22 @@ public class AvrUploader {
         mIntelHex = new IntelHexFileToBuf();
         mIntelHex.parse(hexFile);
         long byteLength = mIntelHex.getByteLength();
-        mAVRMem.buf = new byte[(int)byteLength];
+        mAVRMem.buf = new byte[(int) byteLength];
         mIntelHex.getHexData(mAVRMem.buf);
         mIntelHex = null;
 
-        if(DEBUG_SHOW_HEXDUMP) {
+        if (DEBUG_SHOW_HEXDUMP) {
             String str = "";
-            for(int i=0; i<16; i++) {
+            for (int i = 0; i < 16; i++) {
                 str += String.format("%02x ", mAVRMem.buf[i]);
             }
-            Log.d(TAG, "Hex Dump [0:16]: "+str);
+            Log.d(TAG, "Hex Dump [0:16]: " + str);
 
             str = "";
-            for(int i=(int) (byteLength-16); i<byteLength; i++) {
+            for (int i = (int) (byteLength - 16); i < byteLength; i++) {
                 str += String.format("%02x ", mAVRMem.buf[i]);
             }
-            Log.d(TAG, "Hex Dump ["+(byteLength-16)+":"+byteLength+"]: "+str);
+            Log.d(TAG, "Hex Dump [" + (byteLength - 16) + ":" + byteLength + "]: " + str);
         }
     }
 

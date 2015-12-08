@@ -37,11 +37,11 @@ public class AutoCommunicator {
         usbAccess.init(context);
 
         int vid = device.getVendorId();
-        for(UsbVidList usbVid : UsbVidList.values()) {
-            if(vid == usbVid.getVid()) {
-                if(vid == UsbVidList.FTDI.getVid()) {
+        for (UsbVidList usbVid : UsbVidList.values()) {
+            if (vid == usbVid.getVid()) {
+                if (vid == UsbVidList.FTDI.getVid()) {
                     return new UartFtdi(context);
-                } else if(vid == UsbVidList.CP210X.getVid()) {
+                } else if (vid == UsbVidList.CP210X.getVid()) {
                     return new UartCp210x(context);
                 }
             }
@@ -55,13 +55,13 @@ public class AutoCommunicator {
         UsbAccessor usbAccess = UsbAccessor.INSTANCE;
         usbAccess.init(context);
 
-        for(UsbDevice device : usbAccess.manager().getDeviceList().values()) {
+        for (UsbDevice device : usbAccess.manager().getDeviceList().values()) {
             int vid = device.getVendorId();
-            for(UsbVidList usbVid : UsbVidList.values()) {
-                if(vid == usbVid.getVid()) {
-                    if(vid == UsbVidList.FTDI.getVid()) {
+            for (UsbVidList usbVid : UsbVidList.values()) {
+                if (vid == usbVid.getVid()) {
+                    if (vid == UsbVidList.FTDI.getVid()) {
                         return new UartFtdi(context);
-                    } else if(vid == UsbVidList.CP210X.getVid()) {
+                    } else if (vid == UsbVidList.CP210X.getVid()) {
                         return new UartCp210x(context);
                     }
                 }
