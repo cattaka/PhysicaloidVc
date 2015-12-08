@@ -42,21 +42,21 @@ public class IntelHexParserDemo {
 
     /**
      * Convert Intel HEX to bin
-     *
+     * <p/>
      * usage:
-     *
+     * <p/>
      * IntelHexParserDemo {source} {target}
-     *
+     * <p/>
      * IntelHexParserDemo {source} {target} {address_from} {address_to}
-     *
+     * <p/>
      * {source} is source Intel HEX file name
-     *
+     * <p/>
      * {target} is target BIN file name
-     *
+     * <p/>
      * {address_from} is start address e.g. 0x1D000000 or min
-     *
+     * <p/>
      * {address_to} is end address e.g. 0x1D07FFFF or max
-     *
+     * <p/>
      * if no address_from and address_to is specified, maximum range is used
      *
      * @param args the command line arguments
@@ -106,12 +106,14 @@ public class IntelHexParserDemo {
             }
         }
 
-        try (FileInputStream is = new FileInputStream(fileIn)) {
+        FileInputStream is = null;
+        try {
+            is = new FileInputStream(fileIn);
             OutputStream os = new FileOutputStream(fileOut);
             // init parser
             IntelHexParser parser = new IntelHexParser(is);
 
-            // 1st iteration - calculate maximum output range            
+            // 1st iteration - calculate maximum output range
             RangeDetector rangeDetector = new RangeDetector();
             parser.setDataListener(rangeDetector);
             parser.parse();
@@ -140,8 +142,18 @@ public class IntelHexParserDemo {
             System.out.println(outputRegion);
 
 
-        } catch (IntelHexException | IOException ex) {
+        } catch (IntelHexException ex) {
             Logger.getLogger(IntelHexParserDemo.class.getName()).log(Level.SEVERE, null, ex);
+        } catch (IOException ex) {
+            Logger.getLogger(IntelHexParserDemo.class.getName()).log(Level.SEVERE, null, ex);
+        } finally {
+            if (is != null) {
+                try {
+                    is.close();
+                } catch (IOException ex) {
+                    Logger.getLogger(IntelHexParserDemo.class.getName()).log(Level.SEVERE, null, ex);
+                }
+            }
         }
     }
 

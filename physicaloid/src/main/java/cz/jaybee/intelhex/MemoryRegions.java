@@ -39,7 +39,7 @@ import java.util.List;
  */
 public class MemoryRegions {
 
-    private final List<Region> regions = new ArrayList<>();
+    private final List<Region> regions = new ArrayList<Region>();
 
     public void add(long start, long length) {
         Region prevRegion;
