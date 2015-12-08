@@ -1,12 +1,11 @@
 /**
- * @license Copyright (c) 2012, Jan Breuer
- * All rights reserved.
+ * @license Copyright (c) 2015, Jan Breuer All rights reserved.
  * <p/>
  * Redistribution and use in source and binary forms, with or without
  * modification, are permitted provided that the following conditions are met:
  * <p/>
- * * Redistributions of source code must retain the above copyright notice, this
- * list of conditions and the following disclaimer.
+ * * Redistributions of source code must retain the above copyright notice,
+ * this list of conditions and the following disclaimer.
  * <p/>
  * * Redistributions in binary form must reproduce the above copyright notice,
  * this list of conditions and the following disclaimer in the documentation
@@ -27,6 +26,7 @@
 package cz.jaybee.intelhex;
 
 /**
+ * Type of one record in Intel HEX file (type of line)
  *
  * @author Jan Breuer
  * @license BSD 2-Clause
@@ -46,10 +46,21 @@ public enum IntelHexRecordType {
         this.id = id;
     }
 
+    /**
+     * Convert enum value to integer
+     *
+     * @return
+     */
     public int toInt() {
         return id;
     }
 
+    /**
+     * Convert integer value to enum value
+     *
+     * @param id
+     * @return
+     */
     public static IntelHexRecordType fromInt(int id) {
         for (IntelHexRecordType d : IntelHexRecordType.values()) {
             if (d.id == id) {
