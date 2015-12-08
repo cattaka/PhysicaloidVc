@@ -26,26 +26,17 @@
 package cz.jaybee.intelhex;
 
 /**
- * Listener interface to parser events
+ * Custom exception to prevent using general Exception
  *
  * @author Jan Breuer
  * @license BSD 2-Clause
  */
-public interface IntelHexDataListener {
+public class IntelHexException extends Exception {
 
-    /**
-     * Every time new data are read from file, this listener method is called
-     * with appropriate values. Multiple calls of this function may be done
-     * inside one memory regions but they will not overlap (if they don't
-     * overlap in original intelhex).
-     *
-     * @param address
-     * @param data
-     */
-    public void data(long address, byte[] data);
+    public IntelHexException() {
+    }
 
-    /**
-     * After eof is detected in the file, this listener method is called
-     */
-    public void eof();
+    public IntelHexException(String message) {
+        super(message);
+    }
 }
