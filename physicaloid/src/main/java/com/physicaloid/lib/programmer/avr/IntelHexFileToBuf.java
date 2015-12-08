@@ -16,13 +16,13 @@
 
 package com.physicaloid.lib.programmer.avr;
 
-import cz.jaybee.intelhex.IntelHexParser;
-import cz.jaybee.intelhex.IntelHexParserRun;
-
 import java.io.FileInputStream;
 import java.io.FileNotFoundException;
 import java.io.IOException;
 import java.io.InputStream;
+
+import cz.jaybee.intelhex.IntelHexParser;
+import cz.jaybee.intelhex.IntelHexParserRun;
 
 public class IntelHexFileToBuf {
 
@@ -36,7 +36,7 @@ public class IntelHexFileToBuf {
     }
 
     public long getByteLength() {
-        if(ihpd != null) {
+        if (ihpd != null) {
             return ihpd.getTotalBufLength();
         } else {
             return 0;
@@ -44,7 +44,7 @@ public class IntelHexFileToBuf {
     }
 
     public void getHexData(byte[] buf) {
-        if(ihpd != null) {
+        if (ihpd != null) {
             ihpd.getBufData(buf);
         }
     }

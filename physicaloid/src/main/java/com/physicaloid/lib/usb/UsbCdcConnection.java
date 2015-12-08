@@ -47,16 +47,18 @@ public class UsbCdcConnection {
 
     /**
      * Open first device with VID and PID
+     *
      * @param ids vid and pid
      * @return true : open successful, false : open fail
      */
     public boolean open(UsbVidPid ids) {
-        return open(ids,false, 0);
+        return open(ids, false, 0);
     }
 
     /**
      * Open first CDC-ACM device with VID and PID
-     * @param ids vid and pid
+     *
+     * @param ids      vid and pid
      * @param isCdcAcm true then search only cdc-acm
      * @return true : open successful, false : open fail
      */
@@ -66,27 +68,30 @@ public class UsbCdcConnection {
 
     /**
      * Open channel-th device with VID and PID
+     *
      * @param ids vid and pid
-     * @param ch channel
+     * @param ch  channel
      * @return true : open successful, false : open fail
      */
     public boolean open(UsbVidPid ids, boolean isCdcAcm, int ch) {
-        if(ids == null) return false;
+        if (ids == null) return false;
 
-        int devNum  = 0;
-        int chNum   = 0;
-        for(UsbDevice usbdev : mUsbAccess.manager().getDeviceList().values()) {
-            if(usbdev.getVendorId() == ids.getVid()) {
-                if(ids.getPid() == 0 || ids.getPid() == usbdev.getProductId()) {
-                    for(int intfNum=0; intfNum < usbdev.getInterfaceCount(); intfNum++) {
+        int devNum = 0;
+        int chNum = 0;
+        for (UsbDevice usbdev : mUsbAccess.manager().getDeviceList().values()) {
+            if (usbdev.getVendorId() == ids.getVid()) {
+                if (ids.getPid() == 0 || ids.getPid() == usbdev.getProductId()) {
+                    for (int intfNum = 0; intfNum < usbdev.getInterfaceCount(); intfNum++) {
 
-                        if( (isCdcAcm && (usbdev.getInterface(intfNum).getInterfaceClass() == UsbConstants.USB_CLASS_CDC_DATA))
+                        if ((isCdcAcm && (usbdev.getInterface(intfNum).getInterfaceClass() == UsbConstants.USB_CLASS_CDC_DATA))
                                 || !isCdcAcm) {
-                            if(ch == chNum) {
-                                if(!mUsbAccess.deviceIsConnected(devNum)) {
-                                    if(mUsbAccess.openDevice(devNum,intfNum,ch)) {
-                                        if(DEBUG_SHOW){ Log.d(TAG, "Find VID:"+Integer.toHexString(usbdev.getVendorId())+", PID:"+Integer.toHexString(usbdev.getProductId())+", DevNum:"+devNum+", IntfNum:"+intfNum); }
-                                        mUsbConnectionEp.put(ch,new UsbCdcConnectionEp(mUsbAccess.connection(ch), getEndpoint(devNum, intfNum, UsbConstants.USB_DIR_IN), getEndpoint(devNum, intfNum, UsbConstants.USB_DIR_OUT)));
+                            if (ch == chNum) {
+                                if (!mUsbAccess.deviceIsConnected(devNum)) {
+                                    if (mUsbAccess.openDevice(devNum, intfNum, ch)) {
+                                        if (DEBUG_SHOW) {
+                                            Log.d(TAG, "Find VID:" + Integer.toHexString(usbdev.getVendorId()) + ", PID:" + Integer.toHexString(usbdev.getProductId()) + ", DevNum:" + devNum + ", IntfNum:" + intfNum);
+                                        }
+                                        mUsbConnectionEp.put(ch, new UsbCdcConnectionEp(mUsbAccess.connection(ch), getEndpoint(devNum, intfNum, UsbConstants.USB_DIR_IN), getEndpoint(devNum, intfNum, UsbConstants.USB_DIR_OUT)));
                                         mCdcAcmInterfaceNum = intfNum;
                                         return true;
                                     }
@@ -99,18 +104,22 @@ public class UsbCdcConnection {
             } // end of if
             devNum++;
         } //end of for
-        if(DEBUG_SHOW){ Log.d(TAG, "Cannot find VID:"+ids.getVid()+", PID:"+ids.getPid()); }
+        if (DEBUG_SHOW) {
+            Log.d(TAG, "Cannot find VID:" + ids.getVid() + ", PID:" + ids.getPid());
+        }
         return false;
     }
 
     private UsbEndpoint getEndpoint(int devNum, int intfNum, int usbDir) {
         UsbInterface intf = mUsbAccess.intface(devNum, intfNum);
-        if(intf == null) {return null;}
+        if (intf == null) {
+            return null;
+        }
 
-        for(int i=0; i<intf.getEndpointCount(); i++) {
+        for (int i = 0; i < intf.getEndpointCount(); i++) {
             UsbEndpoint ep = mUsbAccess.endpoint(devNum, intfNum, i);
-            if(ep==null) return null;
-            if(ep.getDirection() == usbDir) {
+            if (ep == null) return null;
+            if (ep.getDirection() == usbDir) {
                 return ep;
             }
         }
@@ -127,6 +136,7 @@ public class UsbCdcConnection {
 
     /**
      * Gets the CDC-ACM interface's number
+     *
      * @return interface number
      */
     public int getCdcAcmInterfaceNum() {
@@ -135,6 +145,7 @@ public class UsbCdcConnection {
 
     /**
      * Gets UsbDeviceConnection for CDC
+     *
      * @return UsbDeviceConnection or null
      */
     public UsbDeviceConnection getConnection() {
@@ -143,16 +154,19 @@ public class UsbCdcConnection {
 
     /**
      * Gets UsbDeviceConnection for CDC
+     *
      * @param ch channel
      * @return UsbDeviceConnection or null
      */
     public UsbDeviceConnection getConnection(int ch) {
         UsbCdcConnectionEp con = mUsbConnectionEp.get(ch);
-        if(con == null) return null;
+        if (con == null) return null;
         return con.connection;
     }
+
     /**
      * Gets IN UsbEndpoint for CDC
+     *
      * @return UsbEndpoint or null
      */
     public UsbEndpoint getEndpointIn() {
@@ -161,16 +175,19 @@ public class UsbCdcConnection {
 
     /**
      * Gets IN UsbEndpoint for CDC
+     *
      * @param ch channel
      * @return UsbEndpoint or null
      */
     public UsbEndpoint getEndpointIn(int ch) {
         UsbCdcConnectionEp con = mUsbConnectionEp.get(ch);
-        if(con == null) return null;
+        if (con == null) return null;
         return con.endpointIn;
     }
+
     /**
      * Gets OUT UsbEndpoint for CDC
+     *
      * @return UsbEndpoint or null
      */
     public UsbEndpoint getEndpointOut() {
@@ -179,12 +196,13 @@ public class UsbCdcConnection {
 
     /**
      * Gets OUT UsbEndpoint for CDC
+     *
      * @param ch channel
      * @return UsbEndpoint or null
      */
     public UsbEndpoint getEndpointOut(int ch) {
         UsbCdcConnectionEp con = mUsbConnectionEp.get(ch);
-        if(con == null) return null;
+        if (con == null) return null;
         return con.endpointOut;
     }
 
@@ -192,6 +210,7 @@ public class UsbCdcConnection {
         public UsbDeviceConnection connection;
         public UsbEndpoint endpointIn;
         public UsbEndpoint endpointOut;
+
         public UsbCdcConnectionEp(UsbDeviceConnection connection, UsbEndpoint endpointIn, UsbEndpoint endpointOut) {
             this.connection = connection;
             this.endpointIn = endpointIn;

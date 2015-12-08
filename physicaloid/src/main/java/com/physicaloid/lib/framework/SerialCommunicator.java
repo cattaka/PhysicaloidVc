@@ -16,10 +16,10 @@
 
 package com.physicaloid.lib.framework;
 
-import com.physicaloid.lib.usb.driver.uart.UartConfig;
-import com.physicaloid.lib.usb.driver.uart.ReadLisener;
-
 import android.content.Context;
+
+import com.physicaloid.lib.usb.driver.uart.ReadLisener;
+import com.physicaloid.lib.usb.driver.uart.UartConfig;
 
 public abstract class SerialCommunicator {
 
@@ -28,19 +28,22 @@ public abstract class SerialCommunicator {
 
     /**
      * Opens a device
+     *
      * @return true : successful, false : fail
      */
     abstract public boolean open();
 
     /**
      * Closes a device
+     *
      * @return true : successful, false : fail
      */
     abstract public boolean close();
 
     /**
      * Reads byte array
-     * @param buf byte array
+     *
+     * @param buf  byte array
      * @param size read size
      * @return actual read size
      */
@@ -48,7 +51,8 @@ public abstract class SerialCommunicator {
 
     /**
      * Writes byte array
-     * @param buf byte array
+     *
+     * @param buf  byte array
      * @param size write size
      * @return actual written size
      */
@@ -56,12 +60,14 @@ public abstract class SerialCommunicator {
 
     /**
      * Checks device is opened
+     *
      * @return true : opened, false : not opened
      */
     abstract public boolean isOpened();
 
     /**
      * Sets Uart configurations
+     *
      * @param config configurations
      * @return true : successful, false : fail
      */
@@ -69,6 +75,7 @@ public abstract class SerialCommunicator {
 
     /**
      * Sets baudrate
+     *
      * @param baudrate baudrate e.g. 9600
      * @return true : successful, false : fail
      */
@@ -76,6 +83,7 @@ public abstract class SerialCommunicator {
 
     /**
      * Sets Data bits
+     *
      * @param dataBits data bits e.g. UartConfig.DATA_BITS8
      * @return true : successful, false : fail
      */
@@ -83,6 +91,7 @@ public abstract class SerialCommunicator {
 
     /**
      * Sets Parity bit
+     *
      * @param parity parity bits e.g. UartConfig.PARITY_NONE
      * @return true : successful, false : fail
      */
@@ -90,6 +99,7 @@ public abstract class SerialCommunicator {
 
     /**
      * Sets Stop bits
+     *
      * @param stopBits stop bits e.g. UartConfig.STOP_BITS1
      * @return true : successful, false : fail
      */
@@ -97,6 +107,7 @@ public abstract class SerialCommunicator {
 
     /**
      * Sets flow control DTR/RTS
+     *
      * @param dtrOn true then DTR on
      * @param rtsOn true then RTS on
      * @return true : successful, false : fail
@@ -105,48 +116,56 @@ public abstract class SerialCommunicator {
 
     /**
      * Gets Uart configurations
+     *
      * @return UART configurations
      */
     abstract public UartConfig getUartConfig();
 
     /**
      * Gets baud-rate
+     *
      * @return baud-rate configuration e.g. 9600
      */
     abstract public int getBaudrate();
 
     /**
      * Gets Data bits
+     *
      * @return data bits e.g. UartConfig.DATA_BITS8
      */
     abstract public int getDataBits();
 
     /**
      * Gets Parity bit
+     *
      * @return parity bits e.g. UartConfig.PARITY_NONE
      */
     abstract public int getParity();
 
     /**
      * Gets Stop bits
+     *
      * @return stop bits e.g. UartConfig.STOP_BITS1
      */
     abstract public int getStopBits();
 
     /**
      * Gets flow control DTR
+     *
      * @return true then DTR on
      */
     abstract public boolean getDtr();
 
     /**
      * Gets flow control RTS
+     *
      * @reutrn true then RTS on
      */
     abstract public boolean getRts();
 
     /**
      * Adds read listener
+     *
      * @param listener ReadListener
      */
     abstract public void addReadListener(ReadLisener listener);

@@ -31,7 +31,7 @@ import com.physicaloid.misc.RingBuffer;
 import java.util.ArrayList;
 import java.util.List;
 
-public class UartCdcAcm extends SerialCommunicator{
+public class UartCdcAcm extends SerialCommunicator {
     private static final String TAG = UartCdcAcm.class.getSimpleName();
 
     private static final boolean DEBUG_SHOW = false && BuildConfig.DEBUG;
@@ -40,9 +40,9 @@ public class UartCdcAcm extends SerialCommunicator{
     private UsbCdcConnection mUsbConnetionManager;
 
     private UartConfig mUartConfig;
-    private static final int RING_BUFFER_SIZE       = 1024;
-    private static final int USB_READ_BUFFER_SIZE   = 256;
-    private static final int USB_WRITE_BUFFER_SIZE  = 256;
+    private static final int RING_BUFFER_SIZE = 1024;
+    private static final int USB_READ_BUFFER_SIZE = 256;
+    private static final int USB_WRITE_BUFFER_SIZE = 256;
     private RingBuffer mBuffer;
 
     private boolean mReadThreadStop = true;
@@ -64,8 +64,8 @@ public class UartCdcAcm extends SerialCommunicator{
 
     @Override
     public boolean open() {
-        for(UsbVidList id : UsbVidList.values()) {
-            if(open(new UsbVidPid(id.getVid(), 0))){
+        for (UsbVidList id : UsbVidList.values()) {
+            if (open(new UsbVidPid(id.getVid(), 0))) {
                 return true;
             }
         }
@@ -73,13 +73,17 @@ public class UartCdcAcm extends SerialCommunicator{
     }
 
     public boolean open(UsbVidPid ids) {
-        if(mUsbConnetionManager.open(ids,true)) {
-            mConnection     = mUsbConnetionManager.getConnection();
-            mEndpointIn     = mUsbConnetionManager.getEndpointIn();
-            mEndpointOut    = mUsbConnetionManager.getEndpointOut();
-            mInterfaceNum   = mUsbConnetionManager.getCdcAcmInterfaceNum();
-            if(!init()) { return false; }
-            if(!setBaudrate(DEFAULT_BAUDRATE)) {return false;}
+        if (mUsbConnetionManager.open(ids, true)) {
+            mConnection = mUsbConnetionManager.getConnection();
+            mEndpointIn = mUsbConnetionManager.getEndpointIn();
+            mEndpointOut = mUsbConnetionManager.getEndpointOut();
+            mInterfaceNum = mUsbConnetionManager.getCdcAcmInterfaceNum();
+            if (!init()) {
+                return false;
+            }
+            if (!setBaudrate(DEFAULT_BAUDRATE)) {
+                return false;
+            }
             mBuffer.clear();
             startRead();
             isOpened = true;
@@ -102,7 +106,9 @@ public class UartCdcAcm extends SerialCommunicator{
 
     @Override
     public int write(byte[] buf, int size) {
-        if(buf == null) { return 0; }
+        if (buf == null) {
+            return 0;
+        }
         int offset = 0;
         int write_size;
         int written_size;
@@ -132,7 +138,7 @@ public class UartCdcAcm extends SerialCommunicator{
     }
 
     private void startRead() {
-        if(mReadThreadStop) {
+        if (mReadThreadStop) {
             mReadThreadStop = false;
             new Thread(mLoop).start();
         }
@@ -141,14 +147,14 @@ public class UartCdcAcm extends SerialCommunicator{
     private Runnable mLoop = new Runnable() {
         @Override
         public void run() {
-            int len=0;
+            int len = 0;
             byte[] rbuf = new byte[USB_READ_BUFFER_SIZE];
-            for (;;) {// this is the main loop for transferring
+            for (; ; ) {// this is the main loop for transferring
 
                 try {
                     len = mConnection.bulkTransfer(mEndpointIn,
                             rbuf, rbuf.length, 50);
-                } catch(Exception e) {
+                } catch (Exception e) {
                     Log.e(TAG, e.toString());
                 }
 
@@ -173,34 +179,35 @@ public class UartCdcAcm extends SerialCommunicator{
 
     /**
      * Sets Uart configurations
+     *
      * @param config configurations
      * @return true : successful, false : fail
      */
     public boolean setUartConfig(UartConfig config) {
         boolean res = true;
         boolean ret = true;
-        if(mUartConfig.baudrate != config.baudrate) {
+        if (mUartConfig.baudrate != config.baudrate) {
             res = setBaudrate(config.baudrate);
             ret = ret && res;
         }
 
-        if(mUartConfig.dataBits != config.dataBits) {
+        if (mUartConfig.dataBits != config.dataBits) {
             res = setDataBits(config.dataBits);
             ret = ret && res;
         }
 
-        if(mUartConfig.parity != config.parity) {
+        if (mUartConfig.parity != config.parity) {
             res = setParity(config.parity);
             ret = ret && res;
         }
 
-        if(mUartConfig.stopBits != config.stopBits) {
+        if (mUartConfig.stopBits != config.stopBits) {
             res = setStopBits(config.stopBits);
             ret = ret && res;
         }
 
-        if(mUartConfig.dtrOn != config.dtrOn ||
-           mUartConfig.rtsOn != config.rtsOn) {
+        if (mUartConfig.dtrOn != config.dtrOn ||
+                mUartConfig.rtsOn != config.rtsOn) {
             res = setDtrRts(config.dtrOn, config.rtsOn);
             ret = ret && res;
         }
@@ -210,12 +217,15 @@ public class UartCdcAcm extends SerialCommunicator{
 
     /**
      * Initializes CDC communication
+     *
      * @return true : successful, false : fail
      */
     private boolean init() {
-        if(mConnection == null) return false;
+        if (mConnection == null) return false;
         int ret = mConnection.controlTransfer(0x21, 0x22, 0x00, mInterfaceNum, null, 0, 0); // init CDC
-        if(ret < 0) { return false; }
+        if (ret < 0) {
+            return false;
+        }
         return true;
     }
 
@@ -226,6 +236,7 @@ public class UartCdcAcm extends SerialCommunicator{
 
     /**
      * Sets baudrate
+     *
      * @param baudrate baudrate e.g. 9600
      * @return true : successful, false : fail
      */
@@ -236,11 +247,13 @@ public class UartCdcAcm extends SerialCommunicator{
         baudByte[1] = (byte) ((baudrate & 0x0000FF00) >> 8);
         baudByte[2] = (byte) ((baudrate & 0x00FF0000) >> 16);
         baudByte[3] = (byte) ((baudrate & 0xFF000000) >> 24);
-        int ret = mConnection.controlTransfer(0x21, 0x20, 0, mInterfaceNum, new byte[] {
+        int ret = mConnection.controlTransfer(0x21, 0x20, 0, mInterfaceNum, new byte[]{
                 baudByte[0], baudByte[1], baudByte[2], baudByte[3], 0x00, 0x00,
                 0x08}, 7, 100);
-        if(ret < 0) { 
-            if(DEBUG_SHOW) { Log.d(TAG, "Fail to setBaudrate"); }
+        if (ret < 0) {
+            if (DEBUG_SHOW) {
+                Log.d(TAG, "Fail to setBaudrate");
+            }
             return false;
         }
         mUartConfig.baudrate = baudrate;
@@ -249,36 +262,45 @@ public class UartCdcAcm extends SerialCommunicator{
 
     /**
      * Sets Data bits
+     *
      * @param dataBits data bits e.g. UartConfig.DATA_BITS8
      * @return true : successful, false : fail
      */
     public boolean setDataBits(int dataBits) {
         // TODO : implement
-        if(DEBUG_SHOW) { Log.d(TAG, "Fail to setDataBits"); }
+        if (DEBUG_SHOW) {
+            Log.d(TAG, "Fail to setDataBits");
+        }
         mUartConfig.dataBits = dataBits;
         return false;
     }
 
     /**
      * Sets Parity bit
+     *
      * @param parity parity bits e.g. UartConfig.PARITY_NONE
      * @return true : successful, false : fail
      */
     public boolean setParity(int parity) {
         // TODO : implement
-        if(DEBUG_SHOW) { Log.d(TAG, "Fail to setParity"); }
+        if (DEBUG_SHOW) {
+            Log.d(TAG, "Fail to setParity");
+        }
         mUartConfig.parity = parity;
         return false;
     }
 
     /**
      * Sets Stop bits
+     *
      * @param stopBits stop bits e.g. UartConfig.STOP_BITS1
      * @return true : successful, false : fail
      */
     public boolean setStopBits(int stopBits) {
         // TODO : implement
-        if(DEBUG_SHOW) { Log.d(TAG, "Fail to setStopBits"); }
+        if (DEBUG_SHOW) {
+            Log.d(TAG, "Fail to setStopBits");
+        }
         mUartConfig.stopBits = stopBits;
         return false;
     }
@@ -286,15 +308,17 @@ public class UartCdcAcm extends SerialCommunicator{
     @Override
     public boolean setDtrRts(boolean dtrOn, boolean rtsOn) {
         int ctrlValue = 0x0000;
-        if(dtrOn) {
+        if (dtrOn) {
             ctrlValue |= 0x0001;
         }
-        if(rtsOn) {
+        if (rtsOn) {
             ctrlValue |= 0x0002;
         }
         int ret = mConnection.controlTransfer(0x21, 0x22, ctrlValue, mInterfaceNum, null, 0, 100);
-        if(ret < 0) { 
-            if(DEBUG_SHOW) { Log.d(TAG, "Fail to setDtrRts"); }
+        if (ret < 0) {
+            if (DEBUG_SHOW) {
+                Log.d(TAG, "Fail to setDtrRts");
+            }
             return false;
         }
         mUartConfig.dtrOn = dtrOn;
@@ -346,7 +370,7 @@ public class UartCdcAcm extends SerialCommunicator{
     // Listener for reading uart
     //////////////////////////////////////////////////////////
     private List<ReadLisener> uartReadListenerList
-        = new ArrayList<ReadLisener>();
+            = new ArrayList<ReadLisener>();
     private boolean mStopReadListener = false;
 
     @Override
@@ -370,8 +394,8 @@ public class UartCdcAcm extends SerialCommunicator{
     }
 
     private void onRead(int size) {
-        if(mStopReadListener) return;
-        for (ReadLisener listener: uartReadListenerList) {
+        if (mStopReadListener) return;
+        for (ReadLisener listener : uartReadListenerList) {
             listener.onRead(size);
         }
     }

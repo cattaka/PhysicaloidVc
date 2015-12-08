@@ -35,15 +35,26 @@ public abstract class UploadProtocol {
     private static final String TAG = UploadProtocol.class.getSimpleName();
 
     UploadCallBack callback;
-    public UploadProtocol(){};
+
+    public UploadProtocol() {
+    }
+
+    ;
 
     public abstract void setSerial(SerialCommunicator comm);
+
     public abstract void setConfig(AvrConf conf, AVRMem mem);
-    public abstract int  open();
+
+    public abstract int open();
+
     public abstract void enable();
-    public abstract int  initialize();
-    public abstract int  check_sig_bytes();
-    public abstract int  paged_write();
+
+    public abstract int initialize();
+
+    public abstract int check_sig_bytes();
+
+    public abstract int paged_write();
+
     public abstract void disable();
 
     public void setCallback(UploadCallBack callback) {
@@ -51,13 +62,15 @@ public abstract class UploadProtocol {
     }
 
     protected void report_progress(int prog) {
-        if(prog > 100) { prog = 100; }
-        if(callback == null) return;
+        if (prog > 100) {
+            prog = 100;
+        }
+        if (callback == null) return;
         callback.onUploading(prog);
     }
 
     protected void report_cancel() {
-        if(callback == null) return;
+        if (callback == null) return;
         callback.onCancel();
     }
 }

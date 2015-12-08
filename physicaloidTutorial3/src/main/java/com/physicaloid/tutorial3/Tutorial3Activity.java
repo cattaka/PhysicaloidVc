@@ -1,8 +1,5 @@
 package com.physicaloid.tutorial3;
 
-import java.io.IOException;
-import java.io.UnsupportedEncodingException;
-
 import android.app.Activity;
 import android.os.Bundle;
 import android.os.Handler;
@@ -17,6 +14,9 @@ import com.physicaloid.lib.Physicaloid;
 import com.physicaloid.lib.Physicaloid.UploadCallBack;
 import com.physicaloid.lib.programmer.avr.UploadErrors;
 import com.physicaloid.lib.usb.driver.uart.ReadLisener;
+
+import java.io.IOException;
+import java.io.UnsupportedEncodingException;
 
 public class Tutorial3Activity extends Activity {
     private static final String TAG = Tutorial3Activity.class.getSimpleName();
@@ -43,12 +43,12 @@ public class Tutorial3Activity extends Activity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_tutorial3);
 
-        btOpen  = (Button) findViewById(R.id.btOpen);
+        btOpen = (Button) findViewById(R.id.btOpen);
         btClose = (Button) findViewById(R.id.btClose);
         btWrite = (Button) findViewById(R.id.btWrite);
-        btUpload= (Button) findViewById(R.id.btUpload);
+        btUpload = (Button) findViewById(R.id.btUpload);
         etWrite = (EditText) findViewById(R.id.etWrite);
-        tvRead  = (TextView) findViewById(R.id.tvRead);
+        tvRead = (TextView) findViewById(R.id.tvRead);
 
         setEnabledUi(false);
 
@@ -57,7 +57,7 @@ public class Tutorial3Activity extends Activity {
     }
 
     public void onClickOpen(View v) {
-        if(mPhysicaloid.open()) { // default 9600bps
+        if (mPhysicaloid.open()) { // default 9600bps
             setEnabledUi(true);
 
             //****************************************************************
@@ -74,7 +74,7 @@ public class Tutorial3Activity extends Activity {
                     try {
                         readStr = new String(buf, "UTF-8");
                     } catch (UnsupportedEncodingException e) {
-                        Log.e(TAG,e.toString());
+                        Log.e(TAG, e.toString());
                         return;
                     }
 
@@ -88,7 +88,7 @@ public class Tutorial3Activity extends Activity {
     }
 
     public void onClickClose(View v) {
-        if(mPhysicaloid.close()) {
+        if (mPhysicaloid.close()) {
             setEnabledUi(false);
             //****************************************************************
             // TODO : clear read callback
@@ -99,7 +99,7 @@ public class Tutorial3Activity extends Activity {
 
     public void onClickWrite(View v) {
         String str = etWrite.getText().toString();
-        if(str.length()>0) {
+        if (str.length() > 0) {
             byte[] buf = str.getBytes();
             mPhysicaloid.write(buf, buf.length);
         }
@@ -126,12 +126,12 @@ public class Tutorial3Activity extends Activity {
 
         @Override
         public void onUploading(int value) {
-            tvAppend(tvRead, "Upload : "+value+" %\n");
+            tvAppend(tvRead, "Upload : " + value + " %\n");
         }
 
         @Override
         public void onPostUpload(boolean success) {
-            if(success) {
+            if (success) {
                 tvAppend(tvRead, "Upload : Successful\n");
             } else {
                 tvAppend(tvRead, "Upload fail\n");
@@ -145,7 +145,7 @@ public class Tutorial3Activity extends Activity {
 
         @Override
         public void onError(UploadErrors err) {
-            tvAppend(tvRead, "Error  : "+err.toString()+"\n");
+            tvAppend(tvRead, "Error  : " + err.toString() + "\n");
         }
     };
     //****************************************************************
@@ -165,6 +165,7 @@ public class Tutorial3Activity extends Activity {
     }
 
     Handler mHandler = new Handler();
+
     private void tvAppend(TextView tv, CharSequence text) {
         final TextView ftv = tv;
         final CharSequence ftext = text;
@@ -177,7 +178,7 @@ public class Tutorial3Activity extends Activity {
     }
 
     private void setEnabledUi(boolean on) {
-        if(on) {
+        if (on) {
             btOpen.setEnabled(false);
             btClose.setEnabled(true);
             btWrite.setEnabled(true);

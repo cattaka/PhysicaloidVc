@@ -28,8 +28,19 @@ public class UsbVidPid {
         this.pid = pid;
     }
 
-    public void setVid(int vid) {this.vid = vid;}
-    public void setPid(int pid) {this.pid = pid;}
-    public int getVid() {return this.vid;}
-    public int getPid() {return this.pid;}
+    public void setVid(int vid) {
+        this.vid = vid;
+    }
+
+    public void setPid(int pid) {
+        this.pid = pid;
+    }
+
+    public int getVid() {
+        return this.vid;
+    }
+
+    public int getPid() {
+        return this.pid;
+    }
 }
