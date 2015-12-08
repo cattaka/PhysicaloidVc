@@ -1,5 +1,5 @@
 group = 'net.cattaka'
-version = '1.0.2-SNAPSHOT'
+version = '1.0.2'
 
 apply plugin: 'com.android.library'
 apply plugin: 'com.github.dcendents.android-maven'
@@ -22,7 +22,7 @@ android {
     }
 }
 
-def projectId = "physicaloid"
+def projectId = "physicaloiddev"
 def projectName = 'Physicaloid Library'
 def siteUrl = 'https://github.com/cattaka/PhysicaloidVc'
 def gitUrl = 'https://github.com/cattaka/PhysicaloidVc.git'
