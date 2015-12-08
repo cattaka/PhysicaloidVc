@@ -6,7 +6,16 @@ This is forked version of Physicaloid Library by Cattaka.
 Original version is [here](https://github.com/ksksue/PhysicaloidLibrary)
 
 ## How to use
-TODO
+Add folloing lines to build.gradle
+
+```groovy
+dependencies {
+    compile 'net.cattaka:physicaloid:$VERSION'
+}
+```
+Put $VERSION that you want to use.
+You can check available versions here. https://bintray.com/cattaka/maven/physicaloid/view
+
 
 I'm going to make it be available from gradle.
 
