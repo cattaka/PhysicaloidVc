@@ -24,6 +24,7 @@ I'm going to make it be available from gradle.
 ## License
 ```
 Copyright 2015 Takao Sumitomo
+Copyright 2013 Keisuke SUZUKI
 
    Licensed under the Apache License, Version 2.0 (the "License");
    you may not use this file except in compliance with the License.
